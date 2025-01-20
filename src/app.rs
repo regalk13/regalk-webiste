@@ -139,7 +139,7 @@ fn HomePage() -> impl IntoView {
             <div class="main-information-container">
                 <div class="main--left-info">
                 <video autoplay loop muted playsinline>
-                    <source src="trimmed.mp4" type="video/mp4" />
+                    <source src="output.mp4" type="video/mp4" />
                 </video>
                 </div>
                 <div class="main--right-info">
@@ -264,7 +264,7 @@ fn HomePage() -> impl IntoView {
             </div>
             <div class="footer-bottom">
                 <p>"© 2025 Regalk - Built with Rust & ❤️"</p>
-                <p>"This site is open source - "<a href="https://github.com/regalk13/website">"view source"</a></p>
+                <p>"This site is open source - "<a href="https://github.com/regalk13/regalk-website">"view source"</a></p>
             </div>
         </div>
     </footer>
