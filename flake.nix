@@ -27,7 +27,6 @@
             })
 
             leptosfmt
-            cargo-leptos
             cargo-generate
             stylance-cli
             dart-sass
