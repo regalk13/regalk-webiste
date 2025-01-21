@@ -123,9 +123,9 @@ fn Setup() -> impl IntoView {
 fn BlogPosts() -> impl IntoView {
     view! {
         <div class="blogs-container">
-            <div class="blog--post"><p>"SOON"</p></div>
-            <div class="blog--post"><p>"SOON"</p></div>
-            <div class="blog--post"><p>"SOON"</p></div>
+        <div class="blog--post glitch-post"><p>"SOON"</p></div>
+        <div class="blog--post glitch-post"><p>"SOON"</p></div>
+        <div class="blog--post glitch-post"><p>"SOON"</p></div>
         </div>
     }
 }
@@ -134,139 +134,225 @@ fn BlogPosts() -> impl IntoView {
 #[component]
 fn HomePage() -> impl IntoView {
     view! {
-        <NavBar />
-        <main>
-            <div class="main-information-container">
-                <div class="main--left-info">
-                <video autoplay loop muted playsinline>
-                    <source src="output.mp4" type="video/mp4" />
-                </video>
-                </div>
-                <div class="main--right-info">
-                    <h1>"Welcome to my "<span class="mark-text">"site!"</span></h1>
+            <NavBar />
+            <main>
+                <div class="main-information-container scroll-appear">
+                    <div class="main--left-info">
+                    <video autoplay loop muted playsinline>
+                        <source src="output.webm" type="video/mp4" />
+                    </video>
+                    </div>
+                    <div class="main--right-info">
+                    <h1>"Welcome to my "<span class="typewriter">site!</span></h1>
                     <p class="main--info-text">"Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"</p>
-                    <figure class="main--image-container">
-                        <img class="main--image" src="regalk-main.jpg" />
-                        <figcaption class="img--quote">(Prompt to stable Diffusion 3: Cubism art image <square 1:1>)</figcaption>
-                    </figure>
+                        <figure class="main--image-container">
+                            <img class="main--image" src="regalk-main.jpg" />
+                            <figcaption class="img--quote">(Prompt to stable Diffusion 3: Cubism art image <square 1:1>)</figcaption>
+                        </figure>
+                    </div>
                 </div>
-            </div>
-            <div id="about-me" class="about-section">
-                <div class="about--content">
-                    <h2>"About Me"</h2>
-                    <p>
-                        "I'm a tech guy with a deep curiosity for both hardware and software. Throughout my journey as a computer scientist, I've delved into mutliple areas where software is needed (I like beign a generalist!). My goal is to always learn, build, and explore innovative technologies that shape the future and improve human life. "
-                    </p>
-                    <br />
-                    <AboutMe />
-                    <br />
-                    <p>
-                        "I have experience in some progamming languages like C, C++, Python, Rust, Zig, JS, TS, Go, Haskell and some more..."
-                    </p>
-                    <br />
-                    <h3>"Interests"</h3>
+                <div id="about-me" class="about-section scroll-appear">
+                    <div class="about--content">
+                        <h2>"About Me"</h2>
+                        <p>
+                            "I'm a tech guy with a deep curiosity for both hardware and software. Throughout my journey as a computer scientist, I've delved into mutliple areas where software is needed (I like beign a generalist!). My goal is to always learn, build, and explore innovative technologies that shape the future and improve human life. "
+                        </p>
+                        <br />
+                        <AboutMe />
+                        <br />
+                        <p>
+                            "I have experience in some progamming languages like C, C++, Python, Rust, Zig, JS, TS, Go, Haskell and some more..."
+                        </p>
+                        <br />
+                        <h3>"Interests"</h3>
 
-                    <Interests />
+                        <Interests />
 
-                    <br />
+                        <br />
 
-                    <h3>Setup</h3>
+                        <h3>Setup</h3>
 
-                    <p style="margin-bottom: 15px">Linux Setup</p>
+                        <p style="margin-bottom: 15px">Linux Setup</p>
 
-                    <Setup />
-                    <div class="quote--container">
-                    <figure class="main--image--quote-container">
-                        <img class="main--image--quote" src="feyman.jpg" />
-                        <figcaption class="img--quote--q">"
+                        <Setup />
+                        <div class="quote--container">
+                        <figure class="main--image--quote-container">
+                            <img class="main--image--quote" src="feyman.jpg" />
+                            <figcaption class="img--quote--q">"
                         \"Fall in love with some activity, and do it! Nobody 
                         ever figures out what life is all about, and it doesn't matter. 
                         Explore the world. Nearly everything is really interesting if you go into it deeply enough. Work as hard and as much as you want to on the things you like to do the best. Don't think about what you want to be, but what you want to do. 
                         Keep up some kind of a minimum with other things so that society doesn't stop you from doing anything at all.\""
-                        <p>"Richard Feynman"</p>
-                        </figcaption>
+                            <p>"Richard Feynman"</p>
+                            </figcaption>
 
-                    </figure>
+                        </figure>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div id="projects" class="projects-section">
-                <div class="project--content">
-                    <h2>"Projects"</h2>
+                <div id="projects" class="projects-section scroll-appear">
+                    <div class="project--content">
+                        <h2>"Projects"</h2>
+                        <p>
+                        "I have been actively working on multiple opensource projects. I love to build on my work and my free time!"</p>
+                        <br />
+                        <ul class="project--list">
+                            <li>SpaceWars - Classic SpaceWar game on Bevy</li>
+                            <li>Color Mixer - Mixing colors on rust with results like real life</li>
+                            <li>"This Website - Axum and Leptos website with his own content management!"</li>
+                            <li>UNO rs - online uno game on rust!</li>
+                            <li>"UNO py - online uno game on python(django)!"</li>
+                            <li>"Tools for valence.rs framework for Minecraft server"</li>
+                            <li>"..."</li>
+                            <li>Advent of code journey</li>
+                        </ul>
+                        <br />
+
+                        <p>"You can go and read more about my projects on my " <a href=" https://github.com/regalk13">"github account"</a></p>
+                    </div>
+                </div>
+
+                <div id="blog" class="blog-section scroll-appear">
+                    <div class="blog--content">
+
+                    <h2>"Blog"</h2>
                     <p>
-                    "I have been actively working on multiple opensource projects. I love to build on my work and my free time!"</p>
-                    <br />
-                    <ul class="project--list">
-                        <li>SpaceWars - Classic SpaceWar game on Bevy</li>
-                        <li>Color Mixer - Mixing colors on rust with results like real life</li>
-                        <li>UNO rs - online uno game on rust!</li>
-                        <li>"UNO py - online uno game on python(django)!"</li>
-                        <li>"Tools for valence.rs framework for Minecraft server"</li>
-                        <li>"..."</li>
-                        <li>Advent of code journey</li>
-                    </ul>
-                    <br />
+                    "A blog were I develop some vague ideas I usually think off. Add it to your RSS feed and feel free to reach out—let's discuss fascinating topics together!"
+                    </p>
+                    <BlogPosts />
 
-                    <p>"You can go and read more about my projects on my " <a href=" https://github.com/regalk13">"github account"</a></p>
-                </div>
-            </div>
+                                    <figure class="main--image--quote-container blog--quote">
+                        <img class="main--image--quote" src="dennis.jpg" />
+                        <figcaption class="img--quote--q">"
+                        \"The only way to learn a new programming language is by writing programs in it.\""
+                        <p>"Dennis Ritchie"</p>
+                        </figcaption>
+                    </figure>
 
-            <div id="blog" class="blog-section">
-                <div class="blog--content">
-                <figure class="main--image--quote-container blog--quote">
-                    <img class="main--image--quote" src="dennis.jpg" />
-                    <figcaption class="img--quote--q">"
-                    \"The only way to learn a new programming language is by writing programs in it.\""
-                    <p>"Dennis Ritchie"</p>
-                    </figcaption>
-                </figure>
-
-
-                <h2>"Blog"</h2>
-                <p>
-                "A blog were I develop some vague ideas I usually think off. Add it to your RSS feed and feel free to reach out—let's discuss fascinating topics together!"
-                </p>
-                <BlogPosts />
-                </div>
-            </div>
-            <div id="secret" class="secret-section">
-                <div class="secret--content">
-                    <h2 class="glitch" data-text="3dnotionestuntcreate">"notiones sunt creata"</h2>
-                    <div class="viewer" hint="its a viewr">
                     </div>
                 </div>
-            </div>
-        </main>
-        <footer>
-        <div class="footer-container">
-            <div class="footer-main">
-                <div class="footer-section">
-                    <h4>"Contact"</h4>
-                    <ul>
-                        <li><a href="mailto:contact@regalk.dev">"Email"</a></li>
-                        <li><a href="https://github.com/regalk13">"GitHub"</a></li>
-                    </ul>
+                <div id="secret" class="secret-section scroll-appear">
+                    <div class="secret--content">
+                        <h2 class="glitch" data-text="notiones sunt create">"notiones sunt creata"</h2>
+                        <div class="viewer" hint="its a viewr">
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>"Quick Links"</h4>
-                    <ul>
-                        <li><a href="#about-me">"About"</a></li>
-                        <li><a href="#projects">"Projects"</a></li>
-                        <li><a href="#blog">"Blog"</a></li>
-                    </ul>
+            </main>
+            <footer>
+            <div class="footer-container">
+                <div class="footer-main">
+                    <div class="footer-section">
+                        <h4>"Contact"</h4>
+                        <ul>
+                            <li><a href="mailto:contact@regalk.dev">"Email"</a></li>
+                            <li><a href="https://github.com/regalk13">"GitHub"</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>"Quick Links"</h4>
+                        <ul>
+                            <li><a href="#about-me">"About"</a></li>
+                            <li><a href="#projects">"Projects"</a></li>
+                            <li><a href="#blog">"Blog"</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>"RSS Feed"</h4>
+                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>"RSS Feed"</h4>
-                    <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                <div class="footer-bottom">
+                    <p>"© 2025 Regalk - Built with Rust & ❤️"</p>
+                    <p>"This site is open source - "<a href="https://github.com/regalk13/regalk-website">"view source"</a></p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>"© 2025 Regalk - Built with Rust & ❤️"</p>
-                <p>"This site is open source - "<a href="https://github.com/regalk13/regalk-website">"view source"</a></p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+        <script>
+        {r#"
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.scroll-appear').forEach(element => observer.observe(element));
+    document.querySelectorAll('.staggered-children').forEach(container => observer.observe(container));
+    "#}
+    </script>
+        <script>
+        "const elements = document.querySelectorAll('.main--image--quote');
+
+elements.forEach((element) => {
+  // Add the mousemove event listener
+  element.addEventListener('mousemove', (e) => {
+    if (!element.matches(':hover')) return;
+
+    const rect = element.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xPercent = x / rect.width;
+    const yPercent = y / rect.height;
+
+    const shadowX = (xPercent - 0.5) * 30;
+    const shadowY = (yPercent - 0.5) * 30;
+    const shadowBlur = Math.max(15, Math.abs(shadowX) + Math.abs(shadowY));
+
+    const distance = Math.sqrt(Math.pow(xPercent - 0.5, 2) + Math.pow(yPercent - 0.5, 2));
+    const intensity = Math.min(0.8, 0.3 + distance);
+
+    element.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px rgba(255, 255, 255, ${intensity})`;
+  });
+
+   element.addEventListener('mouseleave', () => {
+    element.style.transition = 'box-shadow 0.5s ease'; // Add the transition duration and easing
+    element.style.boxShadow = '0 4px 15px rgba(255, 255, 255, 0.6)';
+  });
+});
+    "
+        </script>
+        <script>
+        {r#"
+document.addEventListener('DOMContentLoaded',function(event){
+  var dataText = [ "place!", "exp!", "work!", "ideas!", "site!"];
+  
+  // type one text in the typwriter
+  function typeWriter(text, i, fnCallback) {
+    if (i < (text.length)) {
+     document.querySelector(".typewriter").innerHTML = text.substring(0, i+1) +'<span class="cursor" aria-hidden="true"></span>';
+
+      setTimeout(function() {
+        typeWriter(text, i + 1, fnCallback)
+      }, 100);
     }
+    else if (typeof fnCallback == 'function') {
+      // call callback after timeout
+      setTimeout(fnCallback, 700);
+    }
+  }
+   function StartTextAnimation(i) {
+     if (typeof dataText[i] == 'undefined'){
+        setTimeout(function() {
+          StartTextAnimation(0);
+        }, 20000);
+     }
+    if (i < dataText[i].length) {
+     typeWriter(dataText[i], 0, function(){
+       StartTextAnimation(i + 1);
+     });
+    }
+  }
+  StartTextAnimation(0);
+});
+    "#}
+        </script>
+        }
 }
