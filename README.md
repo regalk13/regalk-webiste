@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/regalk13/regalk-website/blob/main/public/regalk-main.wepb" />
+<img src="https://raw.githubusercontent.com/regalk13/regalk-website/refs/heads/main/public/regalk-main.webp" />
 </div>
 
 <br />
