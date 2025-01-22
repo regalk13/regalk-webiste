@@ -369,7 +369,7 @@ fn HomePage() -> impl IntoView {
                         "Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"
                     </p>
                     <figure class="main--image-container">
-                        <img alt="Main image and logo of the website regalk computer scientist" class="main--image animated-image" src="regalk-main.jpg" />
+                        <img alt="Main image and logo of the website regalk computer scientist" class="main--image animated-image" src="regalk-main.webp" />
                         <figcaption class="img--quote">
                             (Prompt to stable Diffusion 3: Cubism art image <square 1:1>)
                         </figcaption>
@@ -402,7 +402,7 @@ fn HomePage() -> impl IntoView {
                     <Setup />
                     <div class="quote--container">
                         <figure class="main--image--quote-container">
-                            <img alt="Image of Richard Feynman giving a lecture" class="main--image--quote animated-image" src="feyman.jpg" />
+                            <img alt="Image of Richard Feynman giving a lecture" class="main--image--quote animated-image" src="feynman.webp" />
                             <figcaption class="img--quote--q">
                                 "
                                 \"Fall in love with some activity, and do it! Nobody 
@@ -431,7 +431,7 @@ fn HomePage() -> impl IntoView {
                     <BlogPosts />
 
                     <figure class="main--image--quote-container blog--quote">
-                        <img alt="Image of Dennis Ritchie" class="main--image--quote animated-image" src="dennis.jpg" />
+                        <img alt="Image of Dennis Ritchie" class="main--image--quote animated-image" src="dennis.webp" />
                         <figcaption class="img--quote--q">
                             "
                             \"The only way to learn a new programming language is by writing programs in it.\""
