@@ -39,7 +39,7 @@ body {
   width: 100%;
   flex-direction: row;
   align-items: center;
-  background-color: rgba(185, 185, 185, 0.9);
+  background-color: rgba(226, 226, 226, 0.9);
   color: #333;
   padding: 20px;
   font-weight: bold;
@@ -102,6 +102,8 @@ h1 {
 
 .main--left-info {
   max-width: 55%;
+  min-width: 1050px; 
+  min-height: 400px;
   height: 100%;
   background-size: cover;
   overflow: hidden;
@@ -141,11 +143,10 @@ h1 {
 }
 
 
-.main--left-info video {
+.main--left-info div {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: grayscale(40%) sepia(30%) brightness(1.5) contrast(1.2);
+
 }
 
 .main--right-info {
@@ -174,8 +175,7 @@ h1 {
   margin-top: 50px;
   display: flex;
   background-color: #20201a;
-  padding-block: 150px;
-  clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+  padding-block: 60px;
   margin-bottom: 70px;
   justify-content: center;
 }
@@ -195,20 +195,22 @@ h1 {
 }
 
 .blog--content {
+  margin-top: 70px;
   max-width: 800px;
   line-height: 1.5em;
   text-align: left;
 }
 
 .project--content {
-  max-width: 800px;
+  max-width: 1200px;
   line-height: 1.5em;
   text-align: left;
 }
 
 h2 {
+  font-family: 'Press Start 2P', cursive !important;
   color: #1ecef7;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
   margin-bottom: 40px;
 }
@@ -293,7 +295,7 @@ a {
 
 .blog--quote {
   margin-top: 80px;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 .blogs-container {
@@ -304,7 +306,7 @@ a {
   height: 500px;
   gap: 50px;
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
   color: #000;
 }
 
@@ -818,4 +820,126 @@ footer {
 .glitch-post:hover::after {
   animation-duration: 0.4s;
   opacity: 0.8;
+}
+
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+.project-card {
+  border-radius: 5px;
+  background-color: #000;
+  padding: 20px;
+  box-shadow: 2px 5px 15px rgba(255, 255, 255, 0.6);
+  max-width: 500px;
+  min-height: 200px;
+}
+
+.tech-stack {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+
+/* Handling responsive */
+@media only screen and (max-width: 1700px) {
+  h1 {
+    font-size: 40px;
+  }
+  
+  .main--left-info {
+    min-width: 20%;
+    max-width: 50%;
+  }
+  .main--right-info .main--info-text {
+    font-size: 12pt;
+  }
+  .main--image-container figcaption {
+    font-size: 10pt;
+  }
+}
+
+@media only screen  and (max-width: 1360px) {
+  .main-information-container {
+    flex-direction: column-reverse;
+    clip-path: none;
+    padding-top: 10%;
+    background-color: #000;
+  }
+  .main--left-info {
+    min-width:100%;
+    max-width: 100%;
+    animation: none;
+    box-shadow: none;
+    min-height: 300px;
+  }
+  .main--right-info {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .project-information {
+    padding-inline: 40px;
+  }
+  .github-cta p {
+    text-align: center;
+  }
+  .project-card {
+    box-shadow: none;
+  }
+
+}
+
+@media only screen  and (max-width: 830px) {
+  h2 { 
+    font-size: 30px;
+  }
+  .blogs-container {
+    flex-direction: column;
+  }
+  .about--content {
+    max-width: 600px;
+  }
+  .about--content  {
+    font-size: 14px;
+  }
+  .blog--content {
+    max-width: 600px;
+    font-size: 14px;
+  }
+  h2 {
+    line-height: 40px;
+  }
+  .project-card {
+    margin-inline: 20px;
+  }
+}
+
+@media only screen  and (max-width: 730px) {
+  .main-information-container {
+    padding-top: 50%;
+  }
+  .about--content {
+    max-width: 350px;
+  }
+  .blog--content {
+    max-width: 350px;
+  }
+  .project-card {
+    box-shadow: none;
+  }
+  .main--right-info .main--info-text {
+    font-size: 14px;
+    padding-inline: 20px;
+  }
 }

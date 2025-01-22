@@ -17,6 +17,26 @@ extern "C" {
     pub fn init_scroll_animations();
 }
 
+#[wasm_bindgen(module = "/src/js/particles.js")]
+extern "C" {
+    pub fn init();
+ 
+}
+
+#[component]
+pub fn ParticleBackground() -> impl IntoView {
+    let container_ref = NodeRef::<Div>::new();
+
+    Effect::new(move |_| {
+        #[cfg(not(feature = "ssr"))] {
+            if let Some(_) = container_ref.get() {
+                init();
+            }
+        }
+    });
+
+    view! { <div node_ref=container_ref id="particle-canvas-container"></div> }
+}
 
 #[component]
 pub fn TypewriterComponent() -> impl IntoView {
@@ -42,14 +62,39 @@ pub fn TypewriterComponent() -> impl IntoView {
 }
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
+    let page_description = "Computer scientist specializing in systems programming, AI, and low-level development. Explore my projects in Rust, kernel development, and innovative web solutions.";
+    let keywords = "Rust programming, systems programming, kernel development, AI research, web development, Three.js, Leptos, Bevy engine, open source projects";
+    let author = "Regalk";
     view! {
         <!DOCTYPE html> 
         <html lang="en">
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="description" content={page_description} />
+                <meta name="keywords" content={keywords} />
+                <meta name="author" content={author} />
+                <meta name="profile:username" content="regalk13" />
+                <meta name="profile:languages" content="Rust, C, C++, Python, JavaScript" />
+                <meta name="profile:technologies" content="Leptos, Axum, Bevy, Three.js, Linux Kernel" />
+                <meta name="profile:interests" content="AI Hardware, Kernel Development, WebAssembly, Distributed Systems" />
                 <AutoReload options=options.clone() />
                 <HydrationScripts options />
+                <script type="x-shader/x-vertex" id="vertexshader">
+                    {r#"attribute float scale;
+                    void main() {
+                       vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                       gl_PointSize = scale * (300.0 / -mvPosition.z);
+                       gl_Position = projectionMatrix * mvPosition;
+                    }"#}
+                </script>
+                <script type="x-shader/x-fragment" id="fragmentshader">
+                    {r#"uniform vec3 color;
+                    void main() {
+                       if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
+                       gl_FragColor = vec4(color, 1.0);
+                    }"#}
+                </script>
                 <MetaTags />
             </head>
             <body>
@@ -68,7 +113,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/regalk.css" />
 
         // sets the document title
-        <Title text="Welcome to Regalk's website" />
+        <Title text="Regalk | Computer Scientist & Full-Stack Developer" />
         // content for this welcome page
         <Router>
             <NavBar />
@@ -146,7 +191,7 @@ fn Interests() -> impl IntoView {
         "📚 Enjoys reading books and diving into new ideas.",
         "💻 Loves building software and exploring creative projects in free time.",
         "🚶 Appreciates minimalism.",
-        "🔤 Enjoys learning languages currently : 🇬🇧, 🇪🇸, 🇫🇷 (soon 🇩🇪, 🇵🇹).",
+        "🔤 Enjoys learning languages : 🇬🇧, 🇪🇸, 🇫🇷 (soon 🇩🇪, 🇵🇹).",
     ]
     .into_iter()
     .map(|content| view! { <li class="list-disc">{content}</li> })
@@ -212,7 +257,6 @@ fn ProjectsSection() -> impl IntoView {
         description: &'static str,
         technologies: Vec<&'static str>,
         repo: &'static str,
-        live_demo: Option<&'static str>,
     }
 
     let projects = vec![
@@ -221,48 +265,50 @@ fn ProjectsSection() -> impl IntoView {
             description: "A modern reimagining of the classic SpaceWar game built with Bevy engine",
             technologies: vec!["Rust", "Bevy", "WebAssembly"],
             repo: "https://github.com/regalk13/spacewars",
-            live_demo: Some("https://spacewars.regalk.dev"),
         },
         Project {
             name: "Color Mixer",
             description: "Real-world color blending simulation with physics-based mixing algorithms",
             technologies: vec!["Rust", "WGPU", "Color Science"],
-            repo: "https://github.com/regalk13/color-mixer",
-            live_demo: None,
+            repo: "https://github.com/regalk13/mix-colors",
         },
         Project {
             name: "Personal Website",
             description: "Portfolio and blog with custom CMS built using Rust web stack",
             technologies: vec!["Rust", "Leptos", "Axum", "SSG"],
-            repo: "https://github.com/regalk13/website",
-            live_demo: Some("https://regalk.dev"),
+            repo: "https://github.com/regalk13/regalk-website",
         },
         Project {
             name: "UNO.rs",
             description: "Multiplayer UNO game implementation with server-authoritative architecture",
-            technologies: vec!["Rust", "WebSockets", "Bevy"],
+            technologies: vec!["Rust", "WebSockets", "Leptos"],
             repo: "https://github.com/regalk13/uno-rs",
-            live_demo: Some("https://uno.regalk.dev"),
+        },
+        Project {
+            name: "UNO.py",
+            description: "Multiplayer UNO game implementation with server-authoritative architecture",
+            technologies: vec!["Python", "WebSockets", "Django"],
+            repo: "https://github.com/regalk13/uno-game",
         },
         Project {
             name: "Valence Tools",
             description: "Suite of developer tools for the Valence Minecraft server framework",
             technologies: vec!["Rust", "Valence", "Minecraft"],
-            repo: "https://github.com/regalk13/valence-tools",
-            live_demo: None,
+            repo: "https://github.com/IT-MC/valence-extra",
         },
     ];
 
     view! {
         <div id="projects" class="projects-section scroll-appear">
             <div class="project--content">
-                <h2 class="section-title">"Featured Projects"</h2>
-                <p class="section-subtitle">
-                    "A selection of open source initiatives I've contributed to or created. 
-                    Passion drives innovation - these projects represent my journey in 
-                    software craftsmanship."
-                </p>
-
+                <div class="project-information">
+                    <h2 class="section-title">"Featured Projects"</h2>
+                    <p class="section-subtitle">
+                        "A selection of open source initiatives I've contributed to or created. 
+                        Passion drives innovation - these projects represent my journey in 
+                        software craftsmanship."
+                    </p>
+                </div>
                 <div class="project-grid">
                     {projects
                         .into_iter()
@@ -273,19 +319,12 @@ fn ProjectsSection() -> impl IntoView {
                                         <h3 class="project-title">{project.name}</h3>
                                         <div class="project-links">
                                             <a href=project.repo target="_blank" class="github-link">
-                                                <i class="ri-github-fill"></i>
+                                                <i class="">Repository</i>
                                             </a>
-                                            {project
-                                                .live_demo
-                                                .map(|demo| {
-                                                    view! {
-                                                        <a href=demo target="_blank" class="demo-link">
-                                                            <i class="ri-external-link-line"></i>
-                                                        </a>
-                                                    }
-                                                })}
                                         </div>
                                     </div>
+                                    <br />
+
                                     <p class="project-description">{project.description}</p>
                                     <div class="tech-stack">
                                         {project
@@ -322,9 +361,7 @@ fn HomePage() -> impl IntoView {
             <ScrollAnimations />
             <div class="main-information-container scroll-appear">
                 <div class="main--left-info">
-                    <video autoplay loop muted playsinline>
-                        <source src="output.webm" type="video/mp4" />
-                    </video>
+                    <ParticleBackground />
                 </div>
                 <div class="main--right-info">
                     <h1>"Welcome to my "<TypewriterComponent /></h1>
@@ -332,14 +369,14 @@ fn HomePage() -> impl IntoView {
                         "Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"
                     </p>
                     <figure class="main--image-container">
-                        <img class="main--image animated-image" src="regalk-main.jpg" />
+                        <img alt="Main image and logo of the website regalk computer scientist" class="main--image animated-image" src="regalk-main.jpg" />
                         <figcaption class="img--quote">
                             (Prompt to stable Diffusion 3: Cubism art image <square 1:1>)
                         </figcaption>
                     </figure>
                 </div>
             </div>
-            <ScrollAppear id="about-me" class="about-section">
+            <section id="about-me" class="about-section">
                 <div class="about--content">
                     <h2>"About Me"</h2>
                     <p>
@@ -365,7 +402,7 @@ fn HomePage() -> impl IntoView {
                     <Setup />
                     <div class="quote--container">
                         <figure class="main--image--quote-container">
-                            <img class="main--image--quote animated-image" src="feyman.jpg" />
+                            <img alt="Image of Richard Feynman giving a lecture" class="main--image--quote animated-image" src="feyman.jpg" />
                             <figcaption class="img--quote--q">
                                 "
                                 \"Fall in love with some activity, and do it! Nobody 
@@ -378,7 +415,7 @@ fn HomePage() -> impl IntoView {
                         </figure>
                     </div>
                 </div>
-            </ScrollAppear>
+            </section>
 
             <div id="projects" class="projects-section scroll-appear">
                 <ProjectsSection />
@@ -394,7 +431,7 @@ fn HomePage() -> impl IntoView {
                     <BlogPosts />
 
                     <figure class="main--image--quote-container blog--quote">
-                        <img class="main--image--quote animated-image" src="dennis.jpg" />
+                        <img alt="Image of Dennis Ritchie" class="main--image--quote animated-image" src="dennis.jpg" />
                         <figcaption class="img--quote--q">
                             "
                             \"The only way to learn a new programming language is by writing programs in it.\""
