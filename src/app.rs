@@ -1,6 +1,6 @@
 use leptos::html::{Div, Span};
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Script, Stylesheet, Title};
+use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
     StaticSegment,
@@ -13,9 +13,6 @@ use web_sys::Element;
 extern "C" {
     #[wasm_bindgen(js_name = "initTypewriter")]
     pub fn init_typewriter(element: Element, words: Box<[JsValue]>);
-
-    #[wasm_bindgen(js_name = "initImageHover")]
-    pub fn init_image_hover(element: Element);
     #[wasm_bindgen(js_name = "initScrollAnimations")]
     pub fn init_scroll_animations();
 }
@@ -41,21 +38,12 @@ pub fn TypewriterComponent() -> impl IntoView {
         }
     });
 
-    view! {
-        <span node_ref=el class="typewriter"></span>
-    }
-}
-
-#[component]
-pub fn GlobalScripts() -> impl IntoView {
-    view! {
-        <Script src="/js/animations.js"/>
-    }
+    view! { <span node_ref=el class="typewriter"></span> }
 }
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
-        <!DOCTYPE html>
+        <!DOCTYPE html> 
         <html lang="en">
             <head>
                 <meta charset="utf-8" />
@@ -81,8 +69,6 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Welcome to Regalk's website" />
-        <GlobalScripts />
-        <ScrollAnimations />
         // content for this welcome page
         <Router>
             <NavBar />
@@ -98,14 +84,18 @@ pub fn App() -> impl IntoView {
 
 #[component]
 pub fn ScrollAnimations() -> impl IntoView {
+    let el = NodeRef::<Div>::new();
+
     Effect::new(move |_| {
         #[cfg(not(feature = "ssr"))]
         {
-            init_scroll_animations();
+            if let Some(_) = el.get() {                
+                init_scroll_animations();
+            }
         }
     });
 
-    view! { <div></div> }
+    view! { <div node_ref=el></div> }
 }
 
 #[component]
@@ -204,11 +194,14 @@ pub fn ScrollAppear(
     children: Children,
     #[prop(optional)] class: &'static str,
     #[prop(optional)] id: &'static str,
-    #[prop(optional)] tag: &'static str,
 ) -> impl IntoView {
     let class = format!("scroll-appear {}", class);
     
-    return  view! { <div id=id class=class>{children()}</div> };
+    return  view! {
+        <div id=id class=class>
+            {children()}
+        </div>
+    };
 }
 
 #[component]
@@ -269,31 +262,42 @@ fn ProjectsSection() -> impl IntoView {
                     Passion drives innovation - these projects represent my journey in 
                     software craftsmanship."
                 </p>
-                
+
                 <div class="project-grid">
-                    {projects.into_iter().map(|project| view! {
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3 class="project-title">{project.name}</h3>
-                                <div class="project-links">
-                                    <a href=project.repo target="_blank" class="github-link">
-                                        <i class="ri-github-fill"></i>
-                                    </a>
-                                    {project.live_demo.map(|demo| view! {
-                                        <a href=demo target="_blank" class="demo-link">
-                                            <i class="ri-external-link-line"></i>
-                                        </a>
-                                    })}
+                    {projects
+                        .into_iter()
+                        .map(|project| {
+                            view! {
+                                <div class="project-card">
+                                    <div class="project-header">
+                                        <h3 class="project-title">{project.name}</h3>
+                                        <div class="project-links">
+                                            <a href=project.repo target="_blank" class="github-link">
+                                                <i class="ri-github-fill"></i>
+                                            </a>
+                                            {project
+                                                .live_demo
+                                                .map(|demo| {
+                                                    view! {
+                                                        <a href=demo target="_blank" class="demo-link">
+                                                            <i class="ri-external-link-line"></i>
+                                                        </a>
+                                                    }
+                                                })}
+                                        </div>
+                                    </div>
+                                    <p class="project-description">{project.description}</p>
+                                    <div class="tech-stack">
+                                        {project
+                                            .technologies
+                                            .into_iter()
+                                            .map(|tech| view! { <span class="tech-tag">{tech}</span> })
+                                            .collect::<Vec<_>>()}
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="project-description">{project.description}</p>
-                            <div class="tech-stack">
-                                {project.technologies.into_iter().map(|tech| view! {
-                                    <span class="tech-tag">{tech}</span>
-                                }).collect::<Vec<_>>()}
-                            </div>
-                        </div>
-                    }).collect::<Vec<_>>()}
+                            }
+                        })
+                        .collect::<Vec<_>>()}
                 </div>
 
                 <div class="github-cta">
@@ -315,7 +319,7 @@ fn ProjectsSection() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     view! {
         <main>
-           <ScrollAnimations />
+            <ScrollAnimations />
             <div class="main-information-container scroll-appear">
                 <div class="main--left-info">
                     <video autoplay loop muted playsinline>
@@ -328,14 +332,14 @@ fn HomePage() -> impl IntoView {
                         "Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"
                     </p>
                     <figure class="main--image-container">
-                        <img class="main--image" src="regalk-main.jpg" />
+                        <img class="main--image animated-image" src="regalk-main.jpg" />
                         <figcaption class="img--quote">
                             (Prompt to stable Diffusion 3: Cubism art image <square 1:1>)
                         </figcaption>
                     </figure>
                 </div>
             </div>
-            <ScrollAppear tag="section" id="about-me" class="about-section">
+            <ScrollAppear id="about-me" class="about-section">
                 <div class="about--content">
                     <h2>"About Me"</h2>
                     <p>
@@ -361,7 +365,7 @@ fn HomePage() -> impl IntoView {
                     <Setup />
                     <div class="quote--container">
                         <figure class="main--image--quote-container">
-                            <img class="main--image--quote" src="feyman.jpg" />
+                            <img class="main--image--quote animated-image" src="feyman.jpg" />
                             <figcaption class="img--quote--q">
                                 "
                                 \"Fall in love with some activity, and do it! Nobody 
@@ -390,7 +394,7 @@ fn HomePage() -> impl IntoView {
                     <BlogPosts />
 
                     <figure class="main--image--quote-container blog--quote">
-                        <img class="main--image--quote" src="dennis.jpg" />
+                        <img class="main--image--quote animated-image" src="dennis.jpg" />
                         <figcaption class="img--quote--q">
                             "
                             \"The only way to learn a new programming language is by writing programs in it.\""

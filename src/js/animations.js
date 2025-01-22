@@ -8,21 +8,22 @@ let observer = new IntersectionObserver((entries) => {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 });
-console.log(observer);
 
-document.querySelectorAll('.scroll-appear').forEach(element => observer.observe(element));
-document.querySelectorAll('.staggered-children').forEach(container => observer.observe(container));
+export function initScrollAnimations() {
+    document.querySelectorAll('.scroll-appear').forEach((element) => {
+        observer.observe(element);
+        console.log(element);
+    } );
+}
 
-
-const elements = document.querySelectorAll('.main--image--quote');
+const elements = document.querySelectorAll('.animated-image');
 
 elements.forEach((element) => {
-    // Add the mousemove event listener
     element.addEventListener('mousemove', (e) => {
         if (!element.matches(':hover')) return;
 
         const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left;a
+        const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
         const xPercent = x / rect.width;
@@ -39,7 +40,7 @@ elements.forEach((element) => {
     });
 
     element.addEventListener('mouseleave', () => {
-        element.style.transition = 'box-shadow 0.5s ease'; // Add the transition duration and easing
+        element.style.transition = 'box-shadow 2s ease';
         element.style.boxShadow = '0 4px 15px rgba(255, 255, 255, 0.6)';
     });
 });
@@ -48,9 +49,6 @@ elements.forEach((element) => {
 
 
 export function initTypewriter(element, words) {
-    console.log("Initializing typewriter with element:", element);
-    console.log("Words:", words);
-
     function typeWriter(text, i, fnCallback) {
         if (i < text.length) {
             element.innerHTML = text.substring(0, i + 1) + '<span class="cursor" aria-hidden="true"></span>';
