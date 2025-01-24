@@ -78,4 +78,40 @@ export function initTypewriter(element, words) {
     }
 
     startTextAnimation(0);
+    feather.replace();
 }
+
+feather.replace();
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Feather Icons
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+
+    // Mobile menu logic
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuButton && mobileMenu) {
+        // Toggle menu
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Close menu when clicking links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+});

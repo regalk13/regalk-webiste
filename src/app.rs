@@ -9,33 +9,14 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
 
+use crate::sites::{library::Library, contact::Contact};
+
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {
     #[wasm_bindgen(js_name = "initTypewriter")]
     pub fn init_typewriter(element: Element, words: Box<[JsValue]>);
     #[wasm_bindgen(js_name = "initScrollAnimations")]
     pub fn init_scroll_animations();
-}
-
-#[wasm_bindgen(module = "/src/js/particles.js")]
-extern "C" {
-    pub fn init();
- 
-}
-
-#[component]
-pub fn ParticleBackground() -> impl IntoView {
-    let container_ref = NodeRef::<Div>::new();
-
-    Effect::new(move |_| {
-        #[cfg(not(feature = "ssr"))] {
-            if let Some(_) = container_ref.get() {
-                init();
-            }
-        }
-    });
-
-    view! { <div node_ref=container_ref id="particle-canvas-container"></div> }
 }
 
 #[component]
@@ -71,30 +52,37 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
             <head>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content={page_description} />
-                <meta name="keywords" content={keywords} />
-                <meta name="author" content={author} />
+                <meta name="description" content=page_description />
+                <meta name="keywords" content=keywords />
+                <meta name="author" content=author />
                 <meta name="profile:username" content="regalk13" />
                 <meta name="profile:languages" content="Rust, C, C++, Python, JavaScript" />
-                <meta name="profile:technologies" content="Leptos, Axum, Bevy, Three.js, Linux Kernel" />
-                <meta name="profile:interests" content="AI Hardware, Kernel Development, WebAssembly, Distributed Systems" />
+                <meta
+                    name="profile:technologies"
+                    content="Leptos, Axum, Bevy, Three.js, Linux Kernel"
+                />
+                <meta
+                    name="profile:interests"
+                    content="AI Hardware, Kernel Development, WebAssembly, Distributed Systems"
+                />
                 <AutoReload options=options.clone() />
                 <HydrationScripts options />
                 <script type="x-shader/x-vertex" id="vertexshader">
                     {r#"attribute float scale;
                     void main() {
-                       vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                       gl_PointSize = scale * (300.0 / -mvPosition.z);
-                       gl_Position = projectionMatrix * mvPosition;
+                     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                     gl_PointSize = scale * (300.0 / -mvPosition.z);
+                     gl_Position = projectionMatrix * mvPosition;
                     }"#}
                 </script>
                 <script type="x-shader/x-fragment" id="fragmentshader">
                     {r#"uniform vec3 color;
                     void main() {
-                       if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
-                       gl_FragColor = vec4(color, 1.0);
+                     if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
+                     gl_FragColor = vec4(color, 1.0);
                     }"#}
                 </script>
+                <script src="https://unpkg.com/feather-icons"></script>
                 <MetaTags />
             </head>
             <body>
@@ -121,8 +109,11 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage />
+                    <Route path=StaticSegment("/library") view=Library />
+                    <Route path=StaticSegment("/contact") view=Contact />
                 </Routes>
             </main>
+
         </Router>
     }
 }
@@ -161,6 +152,15 @@ fn NavBar() -> impl IntoView {
                     <a href="/contact">"Contact"</a>
                 </li>
             </ul>
+            <div class="mobile--items">
+            <i data-feather="menu" id="mobile-menu-button"></i>
+        </div>
+        <div class="mobile--dropdown" id="mobile-menu">
+        <a href="/">"Home"</a>
+        <a href="/blog">"Blog"</a>
+        <a href="/library">"Library"</a>
+        <a href="/contact">"Contact"</a>
+    </div>
         </div>
     }
 }
@@ -319,7 +319,7 @@ fn ProjectsSection() -> impl IntoView {
                                         <h3 class="project-title">{project.name}</h3>
                                         <div class="project-links">
                                             <a href=project.repo target="_blank" class="github-link">
-                                                <i class="">Repository</i>
+                                                <i data-feather="github"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -360,16 +360,19 @@ fn HomePage() -> impl IntoView {
         <main>
             <ScrollAnimations />
             <div class="main-information-container scroll-appear">
-                <div class="main--left-info">
-                    <ParticleBackground />
-                </div>
                 <div class="main--right-info">
-                    <h1>"Welcome to my "<TypewriterComponent /></h1>
-                    <p class="main--info-text">
-                        "Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"
-                    </p>
+                    <div class="main--right-info-text">
+                        <h1>"Welcome to my "<TypewriterComponent /></h1>
+                        <p class="main--info-text">
+                            "Hi, I'm (Regalk)! A computer scientist who loves exploring hardware, software, and everything in between. From AI hardware to kernel development and brain interfaces, I love building and learning. Oh, and I once competed internationally in web development!"
+                        </p>
+                    </div>
                     <figure class="main--image-container">
-                        <img alt="Main image and logo of the website regalk computer scientist" class="main--image animated-image" src="regalk-main.webp" />
+                        <img
+                            alt="Main image and logo of the website regalk computer scientist"
+                            class="main--image animated-image"
+                            src="regalk-main.webp"
+                        />
                         <figcaption class="img--quote">
                             (Prompt to stable Diffusion 3: Cubism art image <square 1:1>)
                         </figcaption>
@@ -402,7 +405,11 @@ fn HomePage() -> impl IntoView {
                     <Setup />
                     <div class="quote--container">
                         <figure class="main--image--quote-container">
-                            <img alt="Image of Richard Feynman giving a lecture" class="main--image--quote animated-image" src="feynman.webp" />
+                            <img
+                                alt="Image of Richard Feynman giving a lecture"
+                                class="main--image--quote animated-image"
+                                src="feynman.webp"
+                            />
                             <figcaption class="img--quote--q">
                                 "
                                 \"Fall in love with some activity, and do it! Nobody 
@@ -431,7 +438,11 @@ fn HomePage() -> impl IntoView {
                     <BlogPosts />
 
                     <figure class="main--image--quote-container blog--quote">
-                        <img alt="Image of Dennis Ritchie" class="main--image--quote animated-image" src="dennis.webp" />
+                        <img
+                            alt="Image of Dennis Ritchie"
+                            class="main--image--quote animated-image"
+                            src="dennis.webp"
+                        />
                         <figcaption class="img--quote--q">
                             "
                             \"The only way to learn a new programming language is by writing programs in it.\""
