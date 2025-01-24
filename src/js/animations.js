@@ -9,44 +9,70 @@ let observer = new IntersectionObserver((entries) => {
     rootMargin: '0px 0px -50px 0px'
 });
 
-export function initScrollAnimations() {
-    document.querySelectorAll('.scroll-appear').forEach((element) => {
-        observer.observe(element);
-        console.log(element);
-    } );
+export function initFeather() {
+    feather.replace();
+
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
 }
 
-const elements = document.querySelectorAll('.animated-image');
+export function initScrollAnimations() {
+    
+    document.querySelectorAll('.scroll-appear').forEach((element) => {
+        observer.observe(element);
+    } );
 
-elements.forEach((element) => {
-    element.addEventListener('mousemove', (e) => {
-        if (!element.matches(':hover')) return;
+        
+    const elements = document.querySelectorAll('.animated-image');
+    
 
-        const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const xPercent = x / rect.width;
-        const yPercent = y / rect.height;
-
-        const shadowX = (xPercent - 0.5) * 30;
-        const shadowY = (yPercent - 0.5) * 30;
-        const shadowBlur = Math.max(15, Math.abs(shadowX) + Math.abs(shadowY));
-
-        const distance = Math.sqrt(Math.pow(xPercent - 0.5, 2) + Math.pow(yPercent - 0.5, 2));
-        const intensity = Math.min(0.8, 0.3 + distance);
-
-        element.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px rgba(255, 255, 255, ${intensity})`;
+    
+    elements.forEach((element) => {
+        element.addEventListener('mousemove', (e) => {
+            if (!element.matches(':hover')) return;
+    
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+    
+            const xPercent = x / rect.width;
+            const yPercent = y / rect.height;
+    
+            const shadowX = (xPercent - 0.5) * 30;
+            const shadowY = (yPercent - 0.5) * 30;
+            const shadowBlur = Math.max(15, Math.abs(shadowX) + Math.abs(shadowY));
+    
+            const distance = Math.sqrt(Math.pow(xPercent - 0.5, 2) + Math.pow(yPercent - 0.5, 2));
+            const intensity = Math.min(0.8, 0.3 + distance);
+    
+            element.style.boxShadow = `${shadowX}px ${shadowY}px ${shadowBlur}px rgba(255, 255, 255, ${intensity})`;
+        });
+    
+        element.addEventListener('mouseleave', () => {
+            element.style.transition = 'box-shadow 2s ease';
+            element.style.boxShadow = '0 4px 15px rgba(255, 255, 255, 0.6)';
+        });
     });
-
-    element.addEventListener('mouseleave', () => {
-        element.style.transition = 'box-shadow 2s ease';
-        element.style.boxShadow = '0 4px 15px rgba(255, 255, 255, 0.6)';
-    });
-});
-
-
-
+}
 
 export function initTypewriter(element, words) {
     function typeWriter(text, i, fnCallback) {
@@ -78,40 +104,4 @@ export function initTypewriter(element, words) {
     }
 
     startTextAnimation(0);
-    feather.replace();
 }
-
-feather.replace();
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Feather Icons
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
-
-    // Mobile menu logic
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (menuButton && mobileMenu) {
-        // Toggle menu
-        menuButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
-        });
-        
-        // Close menu when clicking links
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-    }
-});

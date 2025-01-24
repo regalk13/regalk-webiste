@@ -9,7 +9,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
 
-use crate::sites::{library::Library, contact::Contact};
+use crate::sites::{library::Library, contact::Contact, blog::Blog};
 
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {
@@ -17,6 +17,8 @@ extern "C" {
     pub fn init_typewriter(element: Element, words: Box<[JsValue]>);
     #[wasm_bindgen(js_name = "initScrollAnimations")]
     pub fn init_scroll_animations();
+    #[wasm_bindgen(js_name = "initFeather")]
+    pub fn init_feather();
 }
 
 #[component]
@@ -70,16 +72,16 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 <script type="x-shader/x-vertex" id="vertexshader">
                     {r#"attribute float scale;
                     void main() {
-                     vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                     gl_PointSize = scale * (300.0 / -mvPosition.z);
-                     gl_Position = projectionMatrix * mvPosition;
+                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                    gl_PointSize = scale * (300.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
                     }"#}
                 </script>
                 <script type="x-shader/x-fragment" id="fragmentshader">
                     {r#"uniform vec3 color;
                     void main() {
-                     if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
-                     gl_FragColor = vec4(color, 1.0);
+                    if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
+                    gl_FragColor = vec4(color, 1.0);
                     }"#}
                 </script>
                 <script src="https://unpkg.com/feather-icons"></script>
@@ -102,15 +104,17 @@ pub fn App() -> impl IntoView {
 
         // sets the document title
         <Title text="Regalk | Computer Scientist & Full-Stack Developer" />
+        <InitFeather />
+
         // content for this welcome page
         <Router>
             <NavBar />
-
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage />
                     <Route path=StaticSegment("/library") view=Library />
                     <Route path=StaticSegment("/contact") view=Contact />
+                    <Route path=StaticSegment("/blog") view=Blog />
                 </Routes>
             </main>
 
@@ -127,6 +131,23 @@ pub fn ScrollAnimations() -> impl IntoView {
         {
             if let Some(_) = el.get() {                
                 init_scroll_animations();
+            }
+        }
+    });
+
+    view! { <div node_ref=el></div> }
+}
+
+
+#[component]
+pub fn InitFeather() -> impl IntoView {
+    let el = NodeRef::<Div>::new();
+
+    Effect::new(move |_| {
+        #[cfg(not(feature = "ssr"))]
+        {
+            if let Some(_) = el.get() {   
+                init_feather();             
             }
         }
     });
@@ -153,14 +174,14 @@ fn NavBar() -> impl IntoView {
                 </li>
             </ul>
             <div class="mobile--items">
-            <i data-feather="menu" id="mobile-menu-button"></i>
-        </div>
-        <div class="mobile--dropdown" id="mobile-menu">
-        <a href="/">"Home"</a>
-        <a href="/blog">"Blog"</a>
-        <a href="/library">"Library"</a>
-        <a href="/contact">"Contact"</a>
-    </div>
+                <i data-feather="menu" id="mobile-menu-button"></i>
+            </div>
+            <div class="mobile--dropdown" id="mobile-menu">
+                <a href="/">"Home"</a>
+                <a href="/blog">"Blog"</a>
+                <a href="/library">"Library"</a>
+                <a href="/contact">"Contact"</a>
+            </div>
         </div>
     }
 }
@@ -316,11 +337,13 @@ fn ProjectsSection() -> impl IntoView {
                             view! {
                                 <div class="project-card">
                                     <div class="project-header">
-                                        <h3 class="project-title">{project.name}</h3>
-                                        <div class="project-links">
-                                            <a href=project.repo target="_blank" class="github-link">
-                                                <i data-feather="github"></i>
-                                            </a>
+                                        <div class="project--title-link-container">
+                                            <h3 class="project-title">{project.name}</h3>
+                                            <div class="project-links">
+                                                <a href=project.repo target="_blank" class="github-link" aria-label=format!("View {} project on GitHub", project.name)>
+                                                    <i data-feather="github"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <br />
@@ -358,7 +381,7 @@ fn ProjectsSection() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     view! {
         <main>
-            <ScrollAnimations />
+        <ScrollAnimations />
             <div class="main-information-container scroll-appear">
                 <div class="main--right-info">
                     <div class="main--right-info-text">
@@ -465,7 +488,7 @@ fn HomePage() -> impl IntoView {
             <div class="footer-container">
                 <div class="footer-main">
                     <div class="footer-section">
-                        <h4>"Contact"</h4>
+                        <h3>"Contact"</h3>
                         <ul>
                             <li>
                                 <a href="mailto:contact@regalk.dev">"Email"</a>
@@ -476,7 +499,7 @@ fn HomePage() -> impl IntoView {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>"Quick Links"</h4>
+                        <h3>"Quick Links"</h3>
                         <ul>
                             <li>
                                 <a href="#about-me">"About"</a>
@@ -490,7 +513,7 @@ fn HomePage() -> impl IntoView {
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>"RSS Feed"</h4>
+                        <h3>"RSS Feed"</h3>
                         <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
                     </div>
                 </div>
