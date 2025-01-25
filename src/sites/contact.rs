@@ -16,7 +16,9 @@ pub fn Contact() -> impl IntoView {
                 <br />
 
                 <ul>
-                    <li><a href="mailto:contact@regalk.dev">contact@regalk.dev</a></li>
+                    <li>
+                        <a href="mailto:contact@regalk.dev">contact@regalk.dev</a>
+                    </li>
                     <li>GPG key for encrypting mail:</li>
                     <li>"curl -sL <> | gpg --import"</li>
                     <li>"Fingerprint: <>"</li>
@@ -60,6 +62,5 @@ pub fn Contact() -> impl IntoView {
                 </div>
             </div>
         </footer>
-
     }
 }

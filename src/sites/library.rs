@@ -257,6 +257,5 @@ pub fn Library() -> impl IntoView {
                 </div>
             </div>
         </footer>
-
     }
 }

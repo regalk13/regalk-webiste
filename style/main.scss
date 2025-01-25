@@ -8,7 +8,14 @@
   src: url(../fonts/IBMPlexMono-Bold.ttf);
 }
 
-@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
+:root {
+  ---white-color: #fff;
+  --light-grey: rgba(85, 85, 85, .204);
+  --dark-grey: #1a1a1a;
+  --blue-color: #1ecef7;
+}
+
 
 * {
   padding: 0px;
@@ -18,16 +25,12 @@
 
 ::-moz-selection {
   color: #000;
-  background: #1ecef7;
+  background: var(--blue-color);
 }
 
 ::selection {
   color: #000;
-  background: #1ecef7;
-}
-
-:root {
-  ---white-color: #fff;
+  background: var(--blue-color);
 }
 
 body {
@@ -103,11 +106,11 @@ h1 {
 
 .navbar--item a:hover {
   cursor: pointer;
-  color: #1ecef7;
+  color: var(--blue-color);
 }
 
 .main-information-container {
-  background-color: #20201a;
+  background-color: var(--dark-grey);
   min-height: 100vh;
   padding-bottom: 20px;
   display: flex;
@@ -181,20 +184,20 @@ h1 {
 }
 
 .mark-text {
-  color: #1ecef7;
+  color: var(--blue-color);
 }
 
 .about-section {
-  margin-top: 150px;
+  margin-top: 120px;
   display: flex;
   justify-content: center;
 }
 
 
 .projects-section {
-  margin-top: 50px;
+  margin-top: 120px;
   display: flex;
-  background-color: #20201a;
+  background-color: var(--dark-grey);
   padding-block: 60px;
   margin-bottom: 70px;
   justify-content: center;
@@ -205,7 +208,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 80px;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 .about--content {
@@ -228,22 +231,20 @@ h1 {
 }
 
 h2 {
-  font-family: 'Press Start 2P', cursive !important;
-  color: #1ecef7;
+  color: var(--blue-color);
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 40px;
 }
 
 h3 {
-  font-family: 'Press Start 2P', cursive !important;
   line-height: 50px;
-  color: #1ecef7;
+  color: var(--blue-color);
   font-size: 25px;
 }
 
 .divider {
-  background-color: #1ecef7;
+  background-color: var(--blue-color);
   height: 2px;
   width: 100%;
   margin-block: 50px;
@@ -354,14 +355,12 @@ a {
   align-items: center;
   font-size: 30px;
   font-weight: bold;
-  font-family: 'Press Start 2P', cursive !important;
-  background-color: #1ecef7;
+  background-color: var(--blue-color);
 }
 
 .glitch {
   position: relative;
   margin: 0 auto;
-  font-family: 'Press Start 2P', cursive !important;
 }
 
 .glitch::before,
@@ -617,7 +616,7 @@ a {
   width: 50%;
   height: 500px;
   margin-top: 50px;
-  background-color: #20201a;
+  background-color: var(--light-grey);
 }
 
 .viewer:hover {
@@ -698,7 +697,7 @@ footer {
 }
 
 .typewriter {
-  color: #1ecef7;
+  color: var(--blue-color);
 }
 
 .cursor {
@@ -903,10 +902,12 @@ footer {
 }
 
 .project-card {
-  background-color: #000;
+  background-color: #55555534;
   padding: 20px;
   max-width: 500px;
-  min-height: 200px;
+  height: 230px;
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  backdrop-filter: blur(8px) saturate(180%);
 }
 
 .tech-stack {
@@ -919,7 +920,7 @@ footer {
 .title-main--page--container {
   padding-top: 10%;
   padding-bottom: 5%;
-  background-color: #20201a;
+  background-color: var(--dark-grey);
 }
 
 
@@ -1038,10 +1039,19 @@ footer {
 }
 
 @media only screen and (max-width: 1360px) {
+  .blog--post {
+    width: 90%;
+  }
   .contact-me--container img {
     width: 100%;
   }
   
+  .main--library-text {
+    padding-inline: 20px;
+  }
+  .collection-books {
+    margin-top: 20px;
+  }
   .main--left-info {
     min-width: 100%;
     max-width: 100%;

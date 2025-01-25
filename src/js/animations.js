@@ -10,8 +10,6 @@ let observer = new IntersectionObserver((entries) => {
 });
 
 export function initFeather() {
-    feather.replace();
-
     const menuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     
@@ -19,6 +17,7 @@ export function initFeather() {
         menuButton.addEventListener('click', (e) => {
             e.stopPropagation();
             mobileMenu.classList.toggle('active');
+            console.log("ACTIVE");
         });
 
         document.addEventListener('click', (e) => {

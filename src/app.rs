@@ -69,22 +69,6 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
                 />
                 <AutoReload options=options.clone() />
                 <HydrationScripts options />
-                <script type="x-shader/x-vertex" id="vertexshader">
-                    {r#"attribute float scale;
-                    void main() {
-                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    gl_PointSize = scale * (300.0 / -mvPosition.z);
-                    gl_Position = projectionMatrix * mvPosition;
-                    }"#}
-                </script>
-                <script type="x-shader/x-fragment" id="fragmentshader">
-                    {r#"uniform vec3 color;
-                    void main() {
-                    if (length(gl_PointCoord - vec2(0.5)) > 0.475) discard;
-                    gl_FragColor = vec4(color, 1.0);
-                    }"#}
-                </script>
-                <script src="https://unpkg.com/feather-icons"></script>
                 <MetaTags />
             </head>
             <body>
@@ -174,7 +158,18 @@ fn NavBar() -> impl IntoView {
                 </li>
             </ul>
             <div class="mobile--items">
-                <i data-feather="menu" id="mobile-menu-button"></i>
+                <svg
+                    id="mobile-menu-button"
+                    fill="#000000"
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <title>bars</title>
+                    <path d="M2 8.749h28c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0h-28c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0zM30 15.25h-28c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h28c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0zM30 23.25h-28c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h28c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0z"></path>
+                </svg>
             </div>
             <div class="mobile--dropdown" id="mobile-menu">
                 <a href="/">"Home"</a>
@@ -338,12 +333,18 @@ fn ProjectsSection() -> impl IntoView {
                                 <div class="project-card">
                                     <div class="project-header">
                                         <div class="project--title-link-container">
-                                            <h3 class="project-title">{project.name}</h3>
-                                            <div class="project-links">
-                                                <a href=project.repo target="_blank" class="github-link" aria-label=format!("View {} project on GitHub", project.name)>
-                                                    <i data-feather="github"></i>
-                                                </a>
-                                            </div>
+                                            <a
+                                                href=project.repo
+                                                target="_blank"
+                                                class="github-link"
+                                                aria-label=format!(
+                                                    "View {} project on GitHub",
+                                                    project.name,
+                                                )
+                                            >
+                                                <h3 class="project-title">{project.name}</h3>
+
+                                            </a>
                                         </div>
                                     </div>
                                     <br />
@@ -381,7 +382,7 @@ fn ProjectsSection() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     view! {
         <main>
-        <ScrollAnimations />
+            <ScrollAnimations />
             <div class="main-information-container scroll-appear">
                 <div class="main--right-info">
                     <div class="main--right-info-text">
@@ -402,7 +403,7 @@ fn HomePage() -> impl IntoView {
                     </figure>
                 </div>
             </div>
-            <section id="about-me" class="about-section">
+            <section id="about-me" class="about-section scroll-appear">
                 <div class="about--content">
                     <h2>"About Me"</h2>
                     <p>
@@ -447,9 +448,7 @@ fn HomePage() -> impl IntoView {
                 </div>
             </section>
 
-            <div id="projects" class="projects-section scroll-appear">
-                <ProjectsSection />
-            </div>
+            <ProjectsSection />
 
             <div id="blog" class="blog-section scroll-appear">
                 <div class="blog--content">
@@ -472,15 +471,6 @@ fn HomePage() -> impl IntoView {
                             <p>"Dennis Ritchie"</p>
                         </figcaption>
                     </figure>
-
-                </div>
-            </div>
-            <div id="secret" class="secret-section scroll-appear">
-                <div class="secret--content">
-                    <h2 class="glitch" data-text="notiones sunt create">
-                        "notiones sunt creata"
-                    </h2>
-                    <div class="viewer" hint="its a viewr"></div>
                 </div>
             </div>
         </main>
