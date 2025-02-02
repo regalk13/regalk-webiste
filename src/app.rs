@@ -2,14 +2,14 @@ use leptos::html::{Div, Span};
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes},
+    components::{Route, Router, Routes },
     StaticSegment,
+    path
 };
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
-
-use crate::sites::{library::Library, contact::Contact, blog::Blog};
+use crate::sites::{library::Library, blog_view::BlogView, contact::Contact, blog::Blog};
 
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {
@@ -99,6 +99,7 @@ pub fn App() -> impl IntoView {
                     <Route path=StaticSegment("/library") view=Library />
                     <Route path=StaticSegment("/contact") view=Contact />
                     <Route path=StaticSegment("/blog") view=Blog />
+                    <Route path=path!("/blog/:id") view=BlogView />
                 </Routes>
             </main>
 
@@ -237,8 +238,9 @@ fn Setup() -> impl IntoView {
 fn BlogPosts() -> impl IntoView {
     view! {
         <div class="blogs-container">
-            <div class="blog--post glitch-post">
-                <p>"SOON"</p>
+            <div class="blog--post content-blog glitch-post">
+                <a href="/blog/whylovenix-2025-02-02.md" class="blog--title">Why I love Nix</a>
+                <p class="blog--preview">"Nix changed the way I see containers, pkg managers and the communities. Nix is the modern way to understand systems."</p>
             </div>
             <div class="blog--post glitch-post">
                 <p>"SOON"</p>

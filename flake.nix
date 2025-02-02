@@ -28,6 +28,7 @@
 
             leptosfmt
             cargo-generate
+            cargo-leptos
             stylance-cli
             dart-sass
             wasm-pack

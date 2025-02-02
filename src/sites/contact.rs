@@ -23,6 +23,7 @@ pub fn Contact() -> impl IntoView {
                     <li>"curl -sL <> | gpg --import"</li>
                     <li>"Fingerprint: <>"</li>
                     <li>"All legitimate emails from me will be signed with my GPG key."</li>
+                    <li>"(The email will be aviable ASAP)."</li>
                 </ul>
                 <br />
                 <br />

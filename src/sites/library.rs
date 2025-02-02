@@ -54,7 +54,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="linearAlgebra.png"
+                                    src="linearAlgebra.webp"
                                     alt="Cover of Linear Algebra Done Right - Axl"
                                     class="book-cover"
                                 />
@@ -80,7 +80,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="leviathan.jpg"
+                                    src="leviathan.webp"
                                     alt="Cover of Leviathan - Thomas Hobbes"
                                     class="book-cover"
                                 />
@@ -102,7 +102,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="singularity.jpg"
+                                    src="singularity.webp"
                                     alt="Cover the The Singularity is Nearer Kurzweil, Ray"
                                     class="book-cover"
                                 />
@@ -133,7 +133,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="computer-networking.jpg"
+                                    src="computer-networking.webp"
                                     alt="Cover the Computer Networking: A Top-Down Approach - Kurose, Ross"
                                     class="book-cover"
                                 />
@@ -154,7 +154,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="brothers-karamazov.jpg"
+                                    src="brothers-karamazov.webp"
                                     alt="Cover The Brothers Karamazov - Fyodor Dostoevsky"
                                     class="book-cover"
                                 />
@@ -165,6 +165,10 @@ pub fn Library() -> impl IntoView {
                                 <li>"Crime and Punishment - Fyodor Dostoevsky"</li>
                                 <li>"The Idiot - Fyodor Dostoevsky"</li>
                                 <li>"The Brothers Karamazov - Fyodor Dostoevsky"</li>
+                                <li>"Oblomov - Ivan Goncharov"</li>
+                                <li>"Life and Fate - Vasily Grossman"</li>
+                                <li>"The Foundation Pit - Andrei Platonov"</li>
+                                <li>"The Cherry Orchard - Anton Chekhov"</li>
 
                             </ul>
                         </div>
@@ -172,7 +176,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="great-tales.jpg"
+                                    src="great-tales.webp"
                                     alt="Cover Lovecraft, H. P. – Great Tales of Horror"
                                     class="book-cover"
                                 />
@@ -201,7 +205,7 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="latin.jpg"
+                                    src="latin.webp"
                                     alt="Cover Wheelock, Frederic M. – Latin, an Introductory Course Based on Ancient Authors "
                                     class="book-cover"
                                 />
