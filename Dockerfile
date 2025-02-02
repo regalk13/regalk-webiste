@@ -24,6 +24,7 @@ WORKDIR /app
 COPY --from=builder /work/target/release/regalk /app/
 COPY --from=builder /work/target/site /app/site
 COPY --from=builder /work/Cargo.toml /app/
+COPY --from=builder /work/blogs /app/blogs
 COPY --from=builder /work/blogs /app/
 COPY --from=builder /work/blogs /app/site
 
