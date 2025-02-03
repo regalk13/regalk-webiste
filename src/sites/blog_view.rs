@@ -34,9 +34,12 @@ fn parse_md_content(content: &str) -> impl IntoView {
                     view! { <img src=src class="content-image" /> }.into_any()
                 },
                 l if l.starts_with('>') => view! {
-                    <span class="quote">
+                    <div class="quote-container">
+                    <div class="quote-left-divider"></div>
+                    <p class="quote">
                         {l.strip_prefix('>').unwrap_or(l).trim().to_string()}
-                    </span>
+                    </p>
+                    </div>
                 }.into_any(),
                 l => view! { 
                     <p>{l.to_string()}</p> 
@@ -128,11 +131,14 @@ pub fn BlogView() -> impl IntoView {
                         <h1>{post.title.to_string()}</h1>
                     </header>
                     <div class="blog--content-view">
-                        <h2>{post.title.to_string()}</h2>
+                        <br />
+                        <br />
                         <span>{post.date.to_string()}</span>
                         <div class="md-content">
-                            {parse_md_content(&post.content.to_string())}
-                        </div>
+                            <div>
+                                {parse_md_content(&post.content.to_string())}
+                            </div>    
+                    </div>
                     </div>
                 }.into_any(),
                 Some(Err(_e)) => view! { 
@@ -147,6 +153,35 @@ pub fn BlogView() -> impl IntoView {
                 }.into_any(),
             }}
         </Suspense>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-main">
+                    <div class="footer-section">
+                        <h3>"Contact"</h3>
+                        <ul>
+                            <li>
+                                <a href="mailto:contact@regalk.dev">"Email"</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/regalk13">"GitHub"</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>"RSS Feed"</h3>
+                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>"© 2025 Regalk - Built with Rust & ❤️"</p>
+                    <p>
+                        "This site is open source - "
+                        <a href="https://github.com/regalk13/regalk-website">"view source"</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
     }
 }
 

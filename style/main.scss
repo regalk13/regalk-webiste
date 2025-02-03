@@ -1090,40 +1090,54 @@ footer {
   font-size: 30px;
   text-align: left;
 }
-.blog--preview-content div span {
-  margin-bottom: 20px;
-  text-align: left;
-}
 
 .md-content {
   text-align: left;
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.md-content div {
+  max-width: 700px;
+}
+
+.md-content div h2 {
+  margin: 0;
+  margin-block: 40px;
+}
 .md-content img {
   margin-block: 20px;
-  width: 50%;
-  padding-inline: 20px;
+  width: 100%;
 }
 
 .md-content p {
   text-align: left;
-  max-width: 700px;
   margin-block: 20px;
 }
 
-.md-content span {
+.quote {
   text-align: left;
-  max-width: 700px;
   margin-block: 20px;
   color: #d4d4d4;
   font-style: italic;
+  margin: 30px;
 }
 
+
+.quote-left-divider {
+  border: 2px solid var(--blue-color);
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+}
+
+.quote-container {
+  position: relative;
+  margin-bottom: 40px;
+}
 
 .content-blog {
   display: flex;
