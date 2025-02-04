@@ -47,6 +47,15 @@ pub fn Library() -> impl IntoView {
                                     "What Every Computer Scientist Should Know About Floating-Point Arithmetic"
                                 </li>
                                 <li>"The Mythical Man-Month - Fred Brooks"</li>
+                                <li>"The Rust Programming Language"</li>
+                                <li>"arXiv:1706.03762 Attention Is All You Need"</li>
+                                <li>"Computer Networking: A Top-Down Approach - Kurose, Ross"</li>
+                                <li>
+                                    "Designing Data-Intensive Applications, 2nd Edition -  Martin Kleppmann, Chris Riccomini"
+                                </li>
+                                <li>
+                                    "Quantum Computation and Quantum Information - Michael Nielsen, Isaac Chuang"
+                                </li>
                             </ul>
                         </div>
 
@@ -74,6 +83,9 @@ pub fn Library() -> impl IntoView {
                                 <li>
                                     "How to Prove It: A Structured Approach - Daniel J. Velleman"
                                 </li>
+                                <li>"Barski, Conrad – Land of Lisp"</li>
+                                <li>"Hart, William – College Algebra"</li>
+                                <li>"Love, Clyde E. – Analytic Geometry"</li>
                             </ul>
                         </div>
                         <div class="book-category--order">
@@ -133,27 +145,6 @@ pub fn Library() -> impl IntoView {
 
                             <aside class="featured-book">
                                 <img
-                                    src="computer-networking.webp"
-                                    alt="Cover the Computer Networking: A Top-Down Approach - Kurose, Ross"
-                                    class="book-cover"
-                                />
-                            </aside>
-                            <ul class="book-list">
-                                <h3>Applied Technology & Systems</h3>
-
-                                <li>"Computer Networking: A Top-Down Approach - Kurose, Ross"</li>
-                                <li>
-                                    "Designing Data-Intensive Applications, 2nd Edition -  Martin Kleppmann, Chris Riccomini"
-                                </li>
-                                <li>
-                                    "Quantum Computation and Quantum Information - Michael Nielsen, Isaac Chuang"
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="book-category--order">
-
-                            <aside class="featured-book">
-                                <img
                                     src="brothers-karamazov.webp"
                                     alt="Cover The Brothers Karamazov - Fyodor Dostoevsky"
                                     class="book-cover"
@@ -185,9 +176,11 @@ pub fn Library() -> impl IntoView {
                                 <h3>World Literature & Classics</h3>
 
                                 <li>"MEDITATIONS, Marcus Aurelius"</li>
+                                <li>"Homer – The Iliad"</li>
                                 <li>
                                     "Tolkien, J. R. R. – The Lord of the Rings, One-Volume Edition"
                                 </li>
+                                <li>"Tolkien, J. R. R. – The Silmarillion"</li>
                                 <li>"Lovecraft, H. P. – Great Tales of Horror"</li>
                                 <li>
                                     "Lyon, Pamela – French Short Stories; Nouvelles françaises"
@@ -199,6 +192,8 @@ pub fn Library() -> impl IntoView {
                                 <li>
                                     "García Márquez, Gabriel – One Hundred Years of Solitude"
                                 </li>
+                                <li>"Alighieri, Dante – The Inferno"</li>
+                                <li>"The Brothers Grimm Fairy Tales"</li>
                             </ul>
                         </div>
                         <div class="book-category--order">
@@ -221,6 +216,12 @@ pub fn Library() -> impl IntoView {
                                 </li>
                                 <li>
                                     "Wheelock, Frederic M. – Latin, an Introductory Course Based on Ancient Authors "
+                                </li>
+                                <li>
+                                    "Comfraterity of Christian Doctrine – The New Testament of Our Lord and Savior Jesus Christ Translated from the Latin Vulgate"
+                                </li>
+                                <li>
+                                    "Whitney, William Dwight – The Roots, Verb-Forms, And Primary Derivatives of the Sankstrit Language: A Supplement to his Sanskrit Grammar"
                                 </li>
                             </ul>
                         </div>
@@ -249,7 +250,11 @@ pub fn Library() -> impl IntoView {
 
                     <div class="footer-section">
                         <h3>"RSS Feed"</h3>
-                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                        <p>
+                            "Subscribe to my "<a target="_blank" href="/rss.xml">
+                                "RSS feed"
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="footer-bottom">

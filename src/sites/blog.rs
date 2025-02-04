@@ -109,11 +109,13 @@ pub fn Blog() -> impl IntoView {
                                                             <div class="blog--preview-content">
                                                                 <div>
                                                                     <a href=href>{text}</a>
-                                                                    <span class="date-blog-release">{file.date.to_string()}</span>
+                                                                    <span class="date-blog-release">
+                                                                        {file.date.to_string()}
+                                                                    </span>
                                                                     <p>{file.desc.to_string()}</p>
                                                                 </div>
-                                                                <div class="image-container"> 
-                                                                    <img src={file.image.to_string()} loading="lazy" />
+                                                                <div class="image-container">
+                                                                    <img src=file.image.to_string() loading="lazy" />
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -128,11 +130,13 @@ pub fn Blog() -> impl IntoView {
                                                         <div class="blog--preview-content">
                                                             <div>
                                                                 <a href=fallback_href>{"No posts found".to_string()}</a>
-                                                                <span class="date-blog-release">{"2025-02-01".to_string()}</span>
+                                                                <span class="date-blog-release">
+                                                                    {"2025-02-01".to_string()}
+                                                                </span>
                                                                 <p>{"".to_string()}</p>
                                                             </div>
-                                                            <div class="image-container"> 
-                                                                <img src={"image.png".to_string()} loading="lazy" />
+                                                            <div class="image-container">
+                                                                <img src="image.png".to_string() loading="lazy" />
                                                             </div>
                                                         </div>
                                                     </li>
@@ -156,13 +160,15 @@ pub fn Blog() -> impl IntoView {
                                                             <a href=fallback_href>
                                                                 {"Error loading posts: ".to_string()}
                                                             </a>
-                                                            <span class="date-blog-release">{"2999-99-99".to_string()}</span>
+                                                            <span class="date-blog-release">
+                                                                {"2999-99-99".to_string()}
+                                                            </span>
                                                             <p>{e.to_string()}</p>
                                                         </div>
 
-                                                            <div class="image-container"> 
-                                                                <img src={"image.png".to_string()} loading="lazy" />
-                                                            </div>
+                                                        <div class="image-container">
+                                                            <img src="image.png".to_string() loading="lazy" />
+                                                        </div>
                                                     </div>
                                                 </li>
                                             },
@@ -192,7 +198,11 @@ pub fn Blog() -> impl IntoView {
 
                     <div class="footer-section">
                         <h3>"RSS Feed"</h3>
-                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                        <p>
+                            "Subscribe to my "<a target="_blank" href="/rss.xml">
+                                "RSS feed"
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="footer-bottom">

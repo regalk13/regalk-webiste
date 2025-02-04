@@ -16,15 +16,9 @@ fn parse_md_content(content: &str) -> impl IntoView {
         lines.into_iter()
         .map(|line| {
             match line.as_str() { // Match on &str instead of String
-                l if l.starts_with("### ") => view! { 
-                    <h3>{l.strip_prefix("### ").unwrap_or(l).to_string()}</h3> 
-                }.into_any(),
-                l if l.starts_with("## ") => view! { 
-                    <h2>{l.strip_prefix("## ").unwrap_or(l).to_string()}</h2> 
-                }.into_any(),
-                l if l.starts_with("# ") => view! { 
-                    <h1>{l.strip_prefix("# ").unwrap_or(l).to_string()}</h1> 
-                }.into_any(),
+                l if l.starts_with("### ") => view! { <h3>{l.strip_prefix("### ").unwrap_or(l).to_string()}</h3> }.into_any(),
+                l if l.starts_with("## ") => view! { <h2>{l.strip_prefix("## ").unwrap_or(l).to_string()}</h2> }.into_any(),
+                l if l.starts_with("# ") => view! { <h1>{l.strip_prefix("# ").unwrap_or(l).to_string()}</h1> }.into_any(),
                 l if l.starts_with("!image[") && l.ends_with(']') => {
                     let src = format!("{}", &l[7..l.len()-1]);
                     view! { <img src=src class="content-image" /> }.into_any()
@@ -35,15 +29,11 @@ fn parse_md_content(content: &str) -> impl IntoView {
                 },
                 l if l.starts_with('>') => view! {
                     <div class="quote-container">
-                    <div class="quote-left-divider"></div>
-                    <p class="quote">
-                        {l.strip_prefix('>').unwrap_or(l).trim().to_string()}
-                    </p>
+                        <div class="quote-left-divider"></div>
+                        <p class="quote">{l.strip_prefix('>').unwrap_or(l).trim().to_string()}</p>
                     </div>
                 }.into_any(),
-                l => view! { 
-                    <p>{l.to_string()}</p> 
-                }.into_any()
+                l => view! { <p>{l.to_string()}</p> }.into_any()
             }
         })
         .collect::<Vec<_>>()
@@ -112,45 +102,51 @@ pub fn BlogView() -> impl IntoView {
 
     view! {
         <Suspense fallback=move || {
-                view! { <div>"Loading post..."</div> }
-            }>
+            view! { <div>"Loading post..."</div> }
+        }>
             {move || match blog_post.get() {
-                None => view! {
-                     <header class="title-main--page--container">
-                        <h1>{"NO BLOG POST FOUND".to_string()}</h1>
-                    </header>
-                    <div class="blog--content-view">
-                        <h2>{"The singularity is nearer".to_string()}</h2>
-                        <span>{"2099-99-99".to_string()}</span>
-                        <div>
+                None => {
+                    view! {
+                        <header class="title-main--page--container">
+                            <h1>{"NO BLOG POST FOUND".to_string()}</h1>
+                        </header>
+                        <div class="blog--content-view">
+                            <h2>{"The singularity is nearer".to_string()}</h2>
+                            <span>{"2099-99-99".to_string()}</span>
+                            <div></div>
                         </div>
-                    </div>
-                }.into_any(),
-                Some(Ok(post)) => view! {
-                    <header class="title-main--page--container">
-                        <h1>{post.title.to_string()}</h1>
-                    </header>
-                    <div class="blog--content-view">
-                        <br />
-                        <br />
-                        <span>{post.date.to_string()}</span>
-                        <div class="md-content">
-                            <div>
-                                {parse_md_content(&post.content.to_string())}
-                            </div>    
-                    </div>
-                    </div>
-                }.into_any(),
-                Some(Err(_e)) => view! { 
-                    <header class="title-main--page--container">
-                        <h1>{"NO BLOG POST FOUND".to_string()}</h1>
-                    </header>
-                    <div class="blog--content-view">
-                        <h2>{"The singularity is nearer".to_string()}</h2>
-                        <span>{"2099-99-99".to_string()}</span>
-                        <div inner_html={"<p></p>".to_string()}></div>
-                    </div>
-                }.into_any(),
+                    }
+                        .into_any()
+                }
+                Some(Ok(post)) => {
+                    view! {
+                        <header class="title-main--page--container">
+                            <h1>{post.title.to_string()}</h1>
+                        </header>
+                        <div class="blog--content-view">
+                            <br />
+                            <br />
+                            <span>{post.date.to_string()}</span>
+                            <div class="md-content">
+                                <div>{parse_md_content(&post.content.to_string())}</div>
+                            </div>
+                        </div>
+                    }
+                        .into_any()
+                }
+                Some(Err(_e)) => {
+                    view! {
+                        <header class="title-main--page--container">
+                            <h1>{"NO BLOG POST FOUND".to_string()}</h1>
+                        </header>
+                        <div class="blog--content-view">
+                            <h2>{"The singularity is nearer".to_string()}</h2>
+                            <span>{"2099-99-99".to_string()}</span>
+                            <div inner_html="<p></p>".to_string()></div>
+                        </div>
+                    }
+                        .into_any()
+                }
             }}
         </Suspense>
         <footer>
@@ -170,7 +166,11 @@ pub fn BlogView() -> impl IntoView {
 
                     <div class="footer-section">
                         <h3>"RSS Feed"</h3>
-                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                        <p>
+                            "Subscribe to my "<a target="_blank" href="/rss.xml">
+                                "RSS feed"
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="footer-bottom">

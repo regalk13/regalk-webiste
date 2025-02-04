@@ -239,8 +239,12 @@ fn BlogPosts() -> impl IntoView {
     view! {
         <div class="blogs-container">
             <div class="blog--post content-blog glitch-post">
-                <a href="/blog/whylovenix-2025-02-02.md" class="blog--title">Why I love Nix</a>
-                <p class="blog--preview">"Nix changed the way I see containers, pkg managers and the communities. Nix is the modern way to understand systems."</p>
+                <a href="/blog/whylovenix-2025-02-02.md" class="blog--title">
+                    Why I love Nix
+                </a>
+                <p class="blog--preview">
+                    "Nix changed the way I see containers, pkg managers and the communities. Nix is the modern way to understand systems."
+                </p>
             </div>
             <div class="blog--post glitch-post">
                 <p>"SOON"</p>
@@ -506,7 +510,11 @@ fn HomePage() -> impl IntoView {
                     </div>
                     <div class="footer-section">
                         <h3>"RSS Feed"</h3>
-                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                        <p>
+                            "Subscribe to my "<a target="_blank" href="/rss.xml">
+                                "RSS feed"
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="footer-bottom">

@@ -51,7 +51,11 @@ pub fn Contact() -> impl IntoView {
 
                     <div class="footer-section">
                         <h3>"RSS Feed"</h3>
-                        <p>"Subscribe to my "<a href="/rss.xml">"RSS feed"</a></p>
+                        <p>
+                            "Subscribe to my "<a target="_blank" href="/rss.xml">
+                                "RSS feed"
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="footer-bottom">
