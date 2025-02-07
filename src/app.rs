@@ -10,7 +10,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
 use crate::sites::{library::Library, blog_view::BlogView, contact::Contact, blog::Blog};
-
+use crate::components::footer::Footer;
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {
     #[wasm_bindgen(js_name = "initTypewriter")]
@@ -102,7 +102,7 @@ pub fn App() -> impl IntoView {
                     <Route path=path!("/blog/:id") view=BlogView />
                 </Routes>
             </main>
-
+            <Footer />
         </Router>
     }
 }
@@ -480,51 +480,5 @@ fn HomePage() -> impl IntoView {
                 </div>
             </div>
         </main>
-        <footer>
-            <div class="footer-container">
-                <div class="footer-main">
-                    <div class="footer-section">
-                        <h3>"Contact"</h3>
-                        <ul>
-                            <li>
-                                <a href="mailto:contact@regalk.dev">"Email"</a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/regalk13">"GitHub"</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>"Quick Links"</h3>
-                        <ul>
-                            <li>
-                                <a href="#about-me">"About"</a>
-                            </li>
-                            <li>
-                                <a href="#projects">"Projects"</a>
-                            </li>
-                            <li>
-                                <a href="#blog">"Blog"</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>"RSS Feed"</h3>
-                        <p>
-                            "Subscribe to my "<a target="_blank" href="/rss.xml">
-                                "RSS feed"
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>"© 2025 Regalk - Built with Rust & ❤️"</p>
-                    <p>
-                        "This site is open source - "
-                        <a href="https://github.com/regalk13/regalk-website">"view source"</a>
-                    </p>
-                </div>
-            </div>
-        </footer>
     }
 }
