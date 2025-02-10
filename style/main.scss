@@ -1058,10 +1058,12 @@ footer {
   display: flex;
   flex-direction: column;
   padding-left: 30px;
+  gap: 8px;
 }
 
 .blog--preview-content div span {
   color: #b4b4b4;
+  text-align: left;
 }
 
 

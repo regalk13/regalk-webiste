@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_router::hooks::use_location;
 use thiserror::Error;
+include!(concat!(env!("OUT_DIR"), "/blog_posts.rs"));
 
 fn parse_md_content(content: &str) -> impl IntoView {
     use regex::Regex;   
@@ -42,47 +43,28 @@ fn parse_md_content(content: &str) -> impl IntoView {
 
 #[server]
 pub async fn get_blog_post(filename: String) -> Result<BlogPost, ServerFnError> {
-    use tokio::fs;
-    use std::collections::HashMap;
-    use regex::Regex;   
+    use regex::Regex;
     
     let valid_format = Regex::new(r"^[a-zA-Z0-9-]+-\d{4}-\d{2}-\d{2}\.md$")
         .map_err(|_| BlogError::Io("Invalid regex pattern".to_string()))?;
-    
+
     if !valid_format.is_match(&filename) {
         return Err(BlogError::Io(
             "Invalid filename format. Expected: {name}-{year}-{month}-{day}.md".to_string()
         ).into());
     }
 
-    let path = format!("./blogs/{}", filename);
-    let content = fs::read_to_string(&path)
-        .await
-        .map_err(|e| BlogError::Io(format!("Failed to read file {}: {}", filename, e)))?;
 
-    let mut metadata = HashMap::new();
-    let mut lines = content.lines();
-    let mut body = String::new();
-    
-    while let Some(line) = lines.next() {
-        if line.starts_with("--") {
-            let line = line.trim_start_matches("--").trim();
-            if let Some((key, value)) = line.split_once(':') {
-                metadata.insert(key.trim().to_string(), value.trim().to_string());
-            }
-        } else {
-            body = lines.collect::<Vec<_>>().join("\n");
-            break;
-        }
-    }
+    let blog_post = BLOG_POSTS.get(&filename.as_str()).unwrap();
 
     Ok(BlogPost {
-        title: metadata.get("title").cloned().unwrap_or_default(),
-        date: metadata.get("date").cloned().unwrap_or_default(),
-        content: body,
-        filename,
+        title: blog_post.title.to_string(),
+        date: blog_post.date.to_string(),
+        content: blog_post.content.to_string(),
+        filename: blog_post.filename.to_string()
     })
 }
+
 
 #[component]
 pub fn BlogView() -> impl IntoView {
@@ -152,7 +134,7 @@ pub fn BlogView() -> impl IntoView {
     }
 }
 
-#[derive(Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, serde::Serialize, serde::Deserialize, Debug)]
 pub struct BlogPost {
     title: String,
     date: String,
@@ -164,5 +146,7 @@ pub struct BlogPost {
 pub enum BlogError {
     #[error("IO error: {0}")]
     Io(String),
+    #[error("Blog post not found: {0}")]
+    NotFound(String),
 }
 
