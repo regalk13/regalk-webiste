@@ -19,7 +19,7 @@ nixblog.webp
 ## The Flakes The Modern Way
 
 The flakes experimental feature is a major development for Nix, it introduces a policy for managing dependencies between Nix expressions, it improves reproducibility, composability and usability in the Nix ecosystem. Although it's still an experimental feature, flakes have been widely used by the Nix community. Similar to your package.json, you have your flake.nix. Your package-lock.json flake.lock.
-As the nix paradigm defines, everything is self-contained. So you can define your entire system, a development environment, or even a production deployment using flakes, and anyone with Nix can spin it up instantly—no "it works on my machine" nonsense. (most of the time it works in this way).
+As the nix paradigm defines, everything is self-contained. So you can define your entire system, a development environment, or even a production deployment using flakes, and anyone with Nix can spin it up instantly——no more ‘it works on my machine’ headaches”.
 
 On the other hand, Flakes experimental features did not break Nix's original design at the user level. The two new files flake.nix/flake.lock introduced by Flakes are just a wrapper for other Nix configurations
 
@@ -64,6 +64,6 @@ Nix Pills: Master the Nix language through bite-sized tutorials.
 
 NixOS Wiki: Community-driven guides and best practices.
 
-Zero to Nix: Modern introduction to Nix concepts.ce
+Zero to Nix: Modern introduction to Nix concepts.
 
-https://nixos.org/
+[NixOS](https://nixos.org/?)

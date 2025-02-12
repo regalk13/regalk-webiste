@@ -1066,6 +1066,15 @@ footer {
   text-align: left;
 }
 
+.code-block {
+  background-color: #24283b;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow: auto;
+  color: #cfc9c2;
+  font-family: monospace;
+}
+
 
 .blog--preview-content div p {
   max-width: 350px;
