@@ -54,11 +54,8 @@ body {
   font-size: 20px;
   justify-content: space-around;
   backdrop-filter: blur(15px);
-  /* Blur effect */
   -webkit-backdrop-filter: blur(15px);
-  /* For Safari */
   transition: all 0.3s ease;
-  /* Smooth transition */
   box-sizing: border-box;
 }
 
@@ -110,12 +107,32 @@ h1 {
 }
 
 .main-information-container {
-  background-color: var(--dark-grey);
   min-height: 100vh;
   padding-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Glass effect overlay */
+.main-information-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1); /* Adjust opacity as needed */
+  backdrop-filter: blur(10px); /* This creates the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  z-index: -1; /* Ensures content stays on top */
+  border-radius: 4px; /* Optional for rounded corners */
+}
+
+/* Ensure content remains unblurred */
+.main-information-container > * {
+  position: relative;
+  z-index: 1;
 }
 
 .mobile--items {

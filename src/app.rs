@@ -1,16 +1,17 @@
+use crate::components::footer::Footer;
+use crate::sites::{blog::Blog, blog_view::BlogView, contact::Contact, library::Library};
 use leptos::html::{Div, Span};
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes },
-    StaticSegment,
-    path
+    components::{Route, Router, Routes},
+    path, StaticSegment,
 };
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
-use crate::sites::{library::Library, blog_view::BlogView, contact::Contact, blog::Blog};
-use crate::components::footer::Footer;
+use leptos_router::hooks::use_location;
+
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {
     #[wasm_bindgen(js_name = "initTypewriter")]
@@ -26,7 +27,8 @@ pub fn TypewriterComponent() -> impl IntoView {
     let el = NodeRef::<Span>::new();
 
     Effect::new(move |_| {
-        #[cfg(not(feature = "ssr"))] {
+        #[cfg(not(feature = "ssr"))]
+        {
             if let Some(element) = el.get() {
                 let words = vec![
                     "place!".into(),
@@ -49,7 +51,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
     let keywords = "Rust programming, systems programming, kernel development, AI research, web development, Three.js, Leptos, Bevy engine, open source projects";
     let author = "Regalk";
     view! {
-        <!DOCTYPE html> 
+        <!DOCTYPE html>
         <html lang="en">
             <head>
                 <meta charset="utf-8" />
@@ -114,7 +116,7 @@ pub fn ScrollAnimations() -> impl IntoView {
     Effect::new(move |_| {
         #[cfg(not(feature = "ssr"))]
         {
-            if let Some(_) = el.get() {                
+            if let Some(_) = el.get() {
                 init_scroll_animations();
             }
         }
@@ -123,7 +125,6 @@ pub fn ScrollAnimations() -> impl IntoView {
     view! { <div node_ref=el></div> }
 }
 
-
 #[component]
 pub fn InitFeather() -> impl IntoView {
     let el = NodeRef::<Div>::new();
@@ -131,8 +132,8 @@ pub fn InitFeather() -> impl IntoView {
     Effect::new(move |_| {
         #[cfg(not(feature = "ssr"))]
         {
-            if let Some(_) = el.get() {   
-                init_feather();             
+            if let Some(_) = el.get() {
+                init_feather();
             }
         }
     });
@@ -263,8 +264,8 @@ pub fn ScrollAppear(
     #[prop(optional)] id: &'static str,
 ) -> impl IntoView {
     let class = format!("scroll-appear {}", class);
-    
-    return  view! {
+
+    return view! {
         <div id=id class=class>
             {children()}
         </div>
@@ -290,7 +291,8 @@ fn ProjectsSection() -> impl IntoView {
         },
         Project {
             name: "Color Mixer",
-            description: "Real-world color blending simulation with physics-based mixing algorithms",
+            description:
+                "Real-world color blending simulation with physics-based mixing algorithms",
             technologies: vec!["Rust", "WGPU", "Color Science"],
             repo: "https://github.com/regalk13/mix-colors",
         },
@@ -302,13 +304,15 @@ fn ProjectsSection() -> impl IntoView {
         },
         Project {
             name: "UNO.rs",
-            description: "Multiplayer UNO game implementation with server-authoritative architecture",
+            description:
+                "Multiplayer UNO game implementation with server-authoritative architecture",
             technologies: vec!["Rust", "WebSockets", "Leptos"],
             repo: "https://github.com/regalk13/uno-rs",
         },
         Project {
             name: "UNO.py",
-            description: "Multiplayer UNO game implementation with server-authoritative architecture",
+            description:
+                "Multiplayer UNO game implementation with server-authoritative architecture",
             technologies: vec!["Python", "WebSockets", "Django"],
             repo: "https://github.com/regalk13/uno-game",
         },
@@ -326,7 +330,7 @@ fn ProjectsSection() -> impl IntoView {
                 <div class="project-information">
                     <h2 class="section-title">"Featured Projects"</h2>
                     <p class="section-subtitle">
-                        "A selection of open source initiatives I've contributed to or created. 
+                        "A selection of open source initiatives I've contributed to or created.
                         Passion drives innovation - these projects represent my journey in 
                         software craftsmanship."
                     </p>
@@ -389,7 +393,7 @@ fn HomePage() -> impl IntoView {
     view! {
         <main>
             <ScrollAnimations />
-            <div class="main-information-container scroll-appear">
+            <div class="main-information-container scroll-appear">        
                 <div class="main--right-info">
                     <div class="main--right-info-text">
                         <h1>"Welcome to my "<TypewriterComponent /></h1>
@@ -402,6 +406,7 @@ fn HomePage() -> impl IntoView {
                             alt="Main image and logo of the website regalk computer scientist"
                             class="main--image animated-image"
                             src="regalk-main.webp"
+                            loading="lazy"
                         />
                         <figcaption class="img--quote">
                             (Prompt to stable Diffusion 3: Cubism art image <square 1:1>)
@@ -439,6 +444,7 @@ fn HomePage() -> impl IntoView {
                                 alt="Image of Richard Feynman giving a lecture"
                                 class="main--image--quote animated-image"
                                 src="feynman.webp"
+                                loading="lazy"
                             />
                             <figcaption class="img--quote--q">
                                 "
@@ -464,19 +470,6 @@ fn HomePage() -> impl IntoView {
                         "A blog were I develop some vague ideas I usually think off. Add it to your RSS feed and feel free to reach out—let's discuss fascinating topics together!"
                     </p>
                     <BlogPosts />
-
-                    <figure class="main--image--quote-container blog--quote">
-                        <img
-                            alt="Image of Dennis Ritchie"
-                            class="main--image--quote animated-image"
-                            src="dennis.webp"
-                        />
-                        <figcaption class="img--quote--q">
-                            "
-                            \"The only way to learn a new programming language is by writing programs in it.\""
-                            <p>"Dennis Ritchie"</p>
-                        </figcaption>
-                    </figure>
                 </div>
             </div>
         </main>

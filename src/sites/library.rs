@@ -25,6 +25,7 @@ pub fn Library() -> impl IntoView {
                                     src="featured-cs-book.webp"
                                     alt="Cover the C Programming Language - (K&R)"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
                             <ul class="book-list">
@@ -66,6 +67,7 @@ pub fn Library() -> impl IntoView {
                                     src="linearAlgebra.webp"
                                     alt="Cover of Linear Algebra Done Right - Axl"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
 
@@ -95,6 +97,7 @@ pub fn Library() -> impl IntoView {
                                     src="leviathan.webp"
                                     alt="Cover of Leviathan - Thomas Hobbes"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
                             <ul class="book-list">
@@ -117,6 +120,7 @@ pub fn Library() -> impl IntoView {
                                     src="singularity.webp"
                                     alt="Cover the The Singularity is Nearer Kurzweil, Ray"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
 
@@ -148,6 +152,7 @@ pub fn Library() -> impl IntoView {
                                     src="brothers-karamazov.webp"
                                     alt="Cover The Brothers Karamazov - Fyodor Dostoevsky"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
                             <ul class="book-list">
@@ -170,6 +175,7 @@ pub fn Library() -> impl IntoView {
                                     src="great-tales.webp"
                                     alt="Cover Lovecraft, H. P. – Great Tales of Horror"
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
                             <ul class="book-list">
@@ -203,6 +209,7 @@ pub fn Library() -> impl IntoView {
                                     src="latin.webp"
                                     alt="Cover Wheelock, Frederic M. – Latin, an Introductory Course Based on Ancient Authors "
                                     class="book-cover"
+                                    loading="lazy"
                                 />
                             </aside>
                             <ul class="book-list">
