@@ -10,7 +10,6 @@ use leptos_router::{
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use web_sys::Element;
-use leptos_router::hooks::use_location;
 
 #[wasm_bindgen(module = "/src/js/animations.js")]
 extern "C" {

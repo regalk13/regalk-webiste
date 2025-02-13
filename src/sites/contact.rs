@@ -20,15 +20,15 @@ pub fn Contact() -> impl IntoView {
                         <a href="mailto:contact@regalk.dev">contact@regalk.dev</a>
                     </li>
                     <li>GPG key for encrypting mail:</li>
-                    <li>"curl -sL <> | gpg --import"</li>
-                    <li>"Fingerprint: <>"</li>
+                    <li>"curl -sL https://keys.openpgp.org/vks/v1/by-email/contact%40regalk.dev | gpg --import"</li>
+                    <li>"Fingerprint: 18A0 C1AF 6930 7363 9B31  B6E2 8F4A 1ADC E194 1807"</li>
                     <li>"All legitimate emails from me will be signed with my GPG key."</li>
-                    <li>"(The email will be aviable ASAP)."</li>
+                    <li>"(The email is ready! 🎉)."</li>
                 </ul>
                 <br />
                 <br />
                 <p>
-                    "I’m not on Twitter, I’m not on Facebook, I'm not on Instagram, I’m not on Reddit, I don’t post on 4chan. I don't like social media in general you can have contact with me through email, my RSS channel and sometimes IRC."
+                    "I'm open to chatting about my blog posts, books from my library, ongoing projects, new project ideas, job opportunities, and any technical topics that spark curiosity. Feel free to reach out for interesting discussions!"
                 </p>
             </div>
 
